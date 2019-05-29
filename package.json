@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "npm run build -- -w",
     "build": "rollup -c --environment NODE_ENV:production",
-    "prepare": "npm run lint && npm run test && npm run build",
+    "prepare": "npm run lint && npm run build",
     "postversion": "git push --follow-tags",
     "lint": "eslint --ext .js,.vue --ignore-path .eslintignore .",
     "test": "jest",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "forward-emitter": "^0.1.1",
-    "indoorjs": "file:../indoorjs"
+    "indoorjs": "^0.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -37,7 +37,6 @@
     "jest": "^24.1.0",
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
-    "leaflet": "^1.4.0",
     "lint-staged": "^7.2.2",
     "rollup": "^1.1.2",
     "rollup-copy-plugin": "^0.1.0",
