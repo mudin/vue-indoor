@@ -3,7 +3,7 @@
     ref="map"
     :center="center" :zoom="zoom"
     @ready="onMapReady">
-    <i-floor :url="url" :width="400" :opacity="0.8"/>
+    <i-floor :url="url" :width="800" :opacity="0.8"/>
     <i-marker
       v-for="marker in markers"
       :key="marker.id"
