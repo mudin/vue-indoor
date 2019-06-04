@@ -14,7 +14,6 @@
     "docs:serve": "docsify serve ./docs -p 4000 -o"
   },
   "dependencies": {
-    "forward-emitter": "^0.1.1",
     "indoorjs": "^0.2.17"
   },
   "devDependencies": {
