@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "forward-emitter": "^0.1.1",
-    "indoorjs": "^0.2.16"
+    "indoorjs": "^0.2.17"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
