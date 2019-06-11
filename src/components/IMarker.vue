@@ -29,7 +29,7 @@ export default {
         return 0;
       }
     },
-    angle: {
+    yaw: {
       type: Number,
       default () {
         return 0;
@@ -85,7 +85,7 @@ export default {
       text: this.text ? this.text + '' : this.text,
       zIndex: this.zIndex,
       rotation: this.rotation,
-      angle: this.angle,
+      yaw: this.yaw,
       size: this.size,
       draggable: this.draggable,
       stroke: this.stroke,
