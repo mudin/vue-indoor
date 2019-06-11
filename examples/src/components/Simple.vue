@@ -13,6 +13,7 @@
       :zIndex="20"
       :stroke="markerColor(marker)"
       @click="handleMarkerClick(marker,$event)"
+      @rotating="handleMarkerRotating(marker,$event)"
       @moving="handleMarkerMoving(marker,$event)"
       @moved="handleMarkerMoved(marker,$event)"
       :draggable="true"
@@ -70,6 +71,13 @@ export default {
       marker.position = imarker.position.clone();
       if(marker.id===this.radar.id) {
         this.radar.position = imarker.position.clone();
+      }
+    },
+    handleMarkerRotating(marker, imarker) {
+      //console.log('rotating', imarker);
+      marker.rotation = imarker.rotation + 0;
+      if(marker.id===this.radar.id) {
+        this.radar.rotation = imarker.rotation + 0;
       }
     },
     handleMarkerMoved(marker, imarker) {
