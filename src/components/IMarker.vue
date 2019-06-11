@@ -29,6 +29,12 @@ export default {
         return 0;
       }
     },
+    angle: {
+      type: Number,
+      default () {
+        return 0;
+      }
+    },
     text: {
       type: [String, Number],
       custom: false,
@@ -73,6 +79,7 @@ export default {
       text: this.text ? this.text + '' : this.text,
       zIndex: this.zIndex,
       rotation: this.rotation,
+      angle: this.angle,
       draggable: this.draggable,
       stroke: this.stroke,
       color: this.color,
