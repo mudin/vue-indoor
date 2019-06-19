@@ -43,7 +43,7 @@ export default {
     },
     text: {
       type: [String, Number],
-      custom: false,
+      custom: true,
       default: null
     },
     stroke: {
@@ -130,6 +130,11 @@ export default {
     setTextColor (newVal, oldVal) {
       if (this.mapObject) {
         this.mapObject.setTextColor(newVal);
+      }
+    },
+    setText (newVal, oldVal) {
+      if (this.mapObject) {
+        this.mapObject.setText(newVal);
       }
     },
     setColor (newVal, oldVal) {
