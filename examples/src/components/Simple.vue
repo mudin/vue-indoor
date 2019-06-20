@@ -10,7 +10,6 @@
       :id="marker.id"
       :position="marker.position"
       :text="marker.text"
-      :zIndex="20"
       :stroke="markerColor(marker)"
       @click="handleMarkerClick(marker,$event)"
       @rotating="handleMarkerRotating(marker,$event)"
@@ -23,7 +22,7 @@
       :draggable="false"
       :position="radar.position"
       :rotation="radar.rotation"
-      :zIndex="10"
+      :zIndex="90"
       :icon="icon"
     ></i-marker>
     <i-connector v-for="link in links"
@@ -31,13 +30,19 @@
       :start="radar.id"
       :color="'#008a00'"
       :end="link">
-      </i-connector>
+    </i-connector>
+    <i-marker-group 
+      @moving="handleGroupMoving"
+      @moved="handleGroupMoved"
+      @scaling="handleGroupScaling"
+      @rotating="handleGroupRotating"
+      :bounds="[[0,0],[200,200]]"/>
   </i-map>
 </template>
 
 <script>
 import * as I from "indoorjs";
-import { iMap, iMarker, iFloor, iConnector } from "vue-indoor";
+import { iMap, iMarkerGroup, iMarker, iFloor, iConnector } from "vue-indoor";
 
 export default {
   name: "Example",
@@ -45,7 +50,8 @@ export default {
     iMap,
     iFloor,
     iMarker,
-    iConnector
+    iConnector,
+    iMarkerGroup
   },
   data() {
     return {
@@ -68,6 +74,7 @@ export default {
       this.addMarkers();
     },
     handleMarkerMoving(marker, imarker) {
+      console.log('moving')
       marker.position = imarker.position.clone();
       if(marker.id===this.radar.id) {
         this.radar.position = imarker.position.clone();
@@ -101,6 +108,21 @@ export default {
         this.links.push(random);
       }
     },
+
+    handleGroupMoving(e) {
+      console.log('mgmoving', e);
+    },
+    handleGroupScaling(e) {
+      console.log('mgscaling', e);
+    },
+    handleGroupRotating(e) {
+      console.log('mgrotating', e);
+    },
+
+    handleGroupMoved(e) {
+      console.log('mgmoved', e);
+    },
+
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
     },
