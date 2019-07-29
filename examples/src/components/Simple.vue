@@ -1,9 +1,6 @@
 <template>
-  <i-map
-    ref="map"
-    :center="center" :zoom="zoom"
-    @ready="onMapReady">
-    <i-floor :url="url" :width="800" :opacity="0.8"/>
+  <i-map ref="map" :center="center" :zoom="zoom" @ready="onMapReady">
+    <i-floor :url="url" :width="800" :opacity="0.8" />
     <i-marker
       v-for="marker in markers"
       :key="marker.id"
@@ -25,18 +22,20 @@
       :zIndex="90"
       :icon="icon"
     ></i-marker>
-    <i-connector v-for="link in links"
+    <i-connector
+      v-for="link in links"
       :key="radar.id+'-'+link"
       :start="radar.id"
       :color="'#008a00'"
-      :end="link">
-    </i-connector>
-    <i-marker-group 
+      :end="link"
+    ></i-connector>
+    <i-marker-group
       @moving="handleGroupMoving"
       @moved="handleGroupMoved"
       @scaling="handleGroupScaling"
       @rotating="handleGroupRotating"
-      :bounds="[[0,0],[200,200]]"/>
+      :bounds="[[0,0],[200,200]]"
+    />
   </i-map>
 </template>
 

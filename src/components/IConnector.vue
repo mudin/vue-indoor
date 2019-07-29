@@ -110,6 +110,9 @@ export default {
       if (end) {
         this.mapObject.setEnd(end);
       }
+    },
+    setColor (color) {
+      this.mapObject.setColor(color);
     }
   },
   render: function (h) {
