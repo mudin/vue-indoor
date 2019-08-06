@@ -30,6 +30,11 @@ export default {
         return 'green';
       }
     },
+    strokeWidth: {
+      type: Number,
+      custom: true,
+      default: () => 1
+    },
     zIndex: {
       type: Number,
       custom: false,
@@ -113,6 +118,10 @@ export default {
     },
     setColor (color) {
       this.mapObject.setColor(color);
+    },
+
+    setStrokeWidth (strokeWidth) {
+      this.mapObject.setStrokeWidth(strokeWidth);
     }
   },
   render: function (h) {
