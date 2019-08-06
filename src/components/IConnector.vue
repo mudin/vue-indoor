@@ -69,6 +69,7 @@ export default {
       start,
       end,
       color: this.color,
+      strokeWidth: this.strokeWidth,
       zIndex: this.zIndex
     }, this);
     this.mapObject = new Connector(start, end, options);
