@@ -33,7 +33,9 @@ export default {
     strokeWidth: {
       type: Number,
       custom: true,
-      default: () => 1
+      default: () => {
+        return 1;
+      }
     },
     zIndex: {
       type: Number,

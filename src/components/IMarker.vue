@@ -18,6 +18,10 @@ export default {
       custom: true,
       default: false
     },
+    clickable: {
+      type: Boolean,
+      default: true
+    },
     position: {
       type: [point, Object, Array],
       custom: true,
@@ -88,6 +92,7 @@ export default {
       yaw: this.yaw,
       size: this.size,
       draggable: this.draggable,
+      clickable: this.clickable,
       stroke: this.stroke,
       color: this.color,
       textColor: this.textColor
