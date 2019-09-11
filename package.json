@@ -79,10 +79,6 @@
   "unpkg": "dist/vue-indoor.min.js",
   "module": "dist/vue-indoor.es.js",
   "sideEffects": false,
-  "peerDependencies": {
-    "indoorjs": "^0.2.10",
-    "vue": "^2.5.17"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/mudin/vue-indoor.git"
