@@ -51,8 +51,8 @@ export default {
   mounted () {
     this.parentContainer = findRealParent(this.$parent);
 
-    let map = this.parentContainer.mapObject;
-    let markers = map.getMarkers();
+    const map = this.parentContainer.mapObject;
+    const markers = map.getMarkers();
     let start, end;
     for (let i = 0; i < markers.length; i++) {
       const marker = markers[i];
@@ -92,8 +92,8 @@ export default {
   methods: {
     setStart (id) {
       let start = null;
-      let map = this.parentContainer.mapObject;
-      let markers = map.getMarkers();
+      const map = this.parentContainer.mapObject;
+      const markers = map.getMarkers();
 
       for (let i = 0; i < markers.length; i++) {
         const marker = markers[i];
@@ -107,8 +107,8 @@ export default {
 
     setEnd (id) {
       let end = null;
-      let map = this.parentContainer.mapObject;
-      let markers = map.getMarkers();
+      const map = this.parentContainer.mapObject;
+      const markers = map.getMarkers();
 
       for (let i = 0; i < markers.length; i++) {
         const marker = markers[i];

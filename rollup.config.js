@@ -45,7 +45,7 @@ export default [
     external: ['vue', 'indoorjs'],
     output: {
       format: 'esm',
-      file: `dist/utils/utils.js`
+      file: 'dist/utils/utils.js'
     },
     plugins: [
       cjs(),
@@ -60,10 +60,12 @@ export default [
   {
     input: 'src/index.js',
     external: ['vue', 'indoorjs'],
-    output: [{
-      format: 'cjs',
-      file: 'dist/vue-indoor.cjs.js'
-    }],
+    output: [
+      {
+        format: 'cjs',
+        file: 'dist/vue-indoor.cjs.js'
+      }
+    ],
     plugins: [
       replace({ 'process.env.NODE_ENV': 'production' }),
       node({
@@ -88,7 +90,7 @@ export default [
       file: 'dist/vue-indoor.min.js',
       globals: {
         vue: 'Vue',
-        'indoor': 'Indoor'
+        indoor: 'Indoor'
       }
     },
     plugins: [
