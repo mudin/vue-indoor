@@ -1,4 +1,4 @@
-import I from 'indoorjs';
+import * as I from 'indoorjs';
 
 export * from './utils/utils';
 

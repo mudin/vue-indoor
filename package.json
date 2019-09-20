@@ -14,7 +14,7 @@
     "docs:serve": "docsify serve ./docs -p 4000 -o"
   },
   "dependencies": {
-    "indoorjs": "^1.0.4"
+    "indoorjs": "file:../indoorjs"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
