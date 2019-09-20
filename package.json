@@ -1,6 +1,6 @@
 {
   "name": "vue-indoor",
-  "version": "0.1.20",
+  "version": "1.0.0",
   "description": "Vue IndoorJS library",
   "author": "Mudin Ibrahim",
   "scripts": {
@@ -14,7 +14,7 @@
     "docs:serve": "docsify serve ./docs -p 4000 -o"
   },
   "dependencies": {
-    "indoorjs": "file:../indoorjs"
+    "indoorjs": "^1.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
