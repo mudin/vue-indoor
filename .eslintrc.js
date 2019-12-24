@@ -12,21 +12,17 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
-  extends: [
-    'plugin:vue/recommended',
-    'standard'
-  ],
+  extends: ['plugin:vue/recommended', 'standard'],
   // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
+  plugins: ['vue'],
   // add your custom rules here
   rules: {
     camelcase: 0,
-    'indent': ['error', 2],
+    indent: ['error', 2],
     'arrow-parens': 0,
     'one-var': 0,
     semi: ['warn', 'always'],
-    'eol-last': ['error', 'always']
+    'eol-last': ['error', 'always'],
+    'space-before-function-paren': 0
   }
 };
