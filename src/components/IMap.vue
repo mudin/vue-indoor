@@ -95,9 +95,13 @@ export default {
     noBlockingAnimations: {
       type: Boolean,
       default: false
+    },
+    showGrid: {
+      type: Boolean,
+      default: true
     }
   },
-  data () {
+  data() {
     return {
       ready: false,
       lastSetCenter: null,
@@ -108,7 +112,7 @@ export default {
     };
   },
   computed: {
-    fitBoundsOptions () {
+    fitBoundsOptions() {
       const options = {};
       if (this.padding) {
         options.padding = this.padding;
@@ -123,24 +127,28 @@ export default {
       return options;
     }
   },
-  mounted () {
-    const options = optionsMerger({
-      minZoom: this.minZoom,
-      maxZoom: this.maxZoom,
-      maxBounds: this.maxBounds,
-      maxBoundsViscosity: this.maxBoundsViscosity,
-      worldCopyJump: this.worldCopyJump,
-      center: this.center,
-      zoom: this.zoom,
-      inertia: this.inertia,
-      inertiaDeceleration: this.inertiaDeceleration,
-      inertiaMaxSpeed: this.inertiaMaxSpeed,
-      easeLinearity: this.easeLinearity,
-      zoomAnimation: this.zoomAnimation,
-      zoomAnimationThreshold: this.zoomAnimationThreshold,
-      fadeAnimation: this.fadeAnimation,
-      markerZoomAnimation: this.markerZoomAnimation
-    }, this);
+  mounted() {
+    const options = optionsMerger(
+      {
+        minZoom: this.minZoom,
+        maxZoom: this.maxZoom,
+        maxBounds: this.maxBounds,
+        maxBoundsViscosity: this.maxBoundsViscosity,
+        worldCopyJump: this.worldCopyJump,
+        center: this.center,
+        zoom: this.zoom,
+        inertia: this.inertia,
+        inertiaDeceleration: this.inertiaDeceleration,
+        inertiaMaxSpeed: this.inertiaMaxSpeed,
+        easeLinearity: this.easeLinearity,
+        zoomAnimation: this.zoomAnimation,
+        zoomAnimationThreshold: this.zoomAnimationThreshold,
+        fadeAnimation: this.fadeAnimation,
+        markerZoomAnimation: this.markerZoomAnimation,
+        showGrid: this.showGrid
+      },
+      this
+    );
     this.mapObject = new Map(this.$el, options);
     this.setBounds(this.bounds);
     this.mapObject.on('moveend', debounce(this.moveEndHandler, 100));
@@ -148,7 +156,7 @@ export default {
     propsBinder(this, this.mapObject, this.$options.props);
 
     // forward all events
-    forward(this.mapObject, this, (eventName) => {
+    forward(this.mapObject, this, eventName => {
       if (eventName === 'ready') {
         this.ready = true;
       }
@@ -156,13 +164,13 @@ export default {
     });
   },
   methods: {
-    update () {
+    update() {
       this.mapObject.update();
     },
-    render () {
+    render() {
       this.mapObject.canvas.renderAll();
     },
-    registerLayerControl (lControlLayers) {
+    registerLayerControl(lControlLayers) {
       this.layerControl = lControlLayers;
       this.mapObject.addControl(lControlLayers.mapObject);
       this.layersToAdd.forEach(layer => {
@@ -170,7 +178,7 @@ export default {
       });
       this.layersToAdd = [];
     },
-    addLayer (layer, alreadyAdded) {
+    addLayer(layer, alreadyAdded) {
       if (layer.layerType !== undefined) {
         if (this.layerControl === undefined) {
           this.layersToAdd.push(layer);
@@ -182,10 +190,10 @@ export default {
         this.mapObject.addLayer(layer.mapObject);
       }
     },
-    removeLayer (layer, alreadyRemoved) {
+    removeLayer(layer, alreadyRemoved) {
       if (layer.layerType !== undefined) {
         if (this.layerControl === undefined) {
-          this.layersToAdd = this.layersToAdd.filter((l) => l.name !== layer.name);
+          this.layersToAdd = this.layersToAdd.filter(l => l.name !== layer.name);
         } else {
           this.layerControl.removeLayer(layer);
         }
@@ -194,26 +202,25 @@ export default {
         this.mapObject.removeLayer(layer.mapObject);
       }
     },
-    setZoom (newVal, oldVal) {
+    setZoom(newVal, oldVal) {
       this.mapObject.setZoom(newVal, {
         animate: !this.noBlockingAnimations ? false : null
       });
     },
-    setCenter (newVal, oldVal) {
+    setCenter(newVal, oldVal) {
       if (newVal == null) {
         return;
       }
       const newCenter = new Point(newVal);
       const oldCenter = this.lastSetCenter || this.mapObject.getCenter();
-      if (oldCenter.lat !== newCenter.lat ||
-        oldCenter.lng !== newCenter.lng) {
+      if (oldCenter.lat !== newCenter.lat || oldCenter.lng !== newCenter.lng) {
         this.lastSetCenter = newCenter;
         this.mapObject.panTo(newCenter, {
           animate: !this.noBlockingAnimations ? false : null
         });
       }
     },
-    setBounds (newVal, oldVal) {
+    setBounds(newVal, oldVal) {
       // if (!newVal) {
       //   return;
       // }
@@ -228,19 +235,19 @@ export default {
       //   this.mapObject.fitBounds(newBounds, this.fitBoundsOptions);
       // }
     },
-    setPaddingBottomRight (newVal, oldVal) {
+    setPaddingBottomRight(newVal, oldVal) {
       this.paddingBottomRight = newVal;
     },
-    setPaddingTopLeft (newVal, oldVal) {
+    setPaddingTopLeft(newVal, oldVal) {
       this.paddingTopLeft = newVal;
     },
-    setPadding (newVal, oldVal) {
+    setPadding(newVal, oldVal) {
       this.padding = newVal;
     },
-    fitBounds (bounds) {
+    fitBounds(bounds) {
       this.mapObject.fitBounds(bounds);
     },
-    moveEndHandler () {
+    moveEndHandler() {
       this.$emit('update:zoom', this.mapObject.getZoom());
       const center = this.mapObject.getCenter();
       this.$emit('update:center', center);
@@ -252,8 +259,8 @@ export default {
 </script>
 
 <style type="text/css">
-  .vue-indoor-map {
-    height: 100%;
-    width: 100%;
-  }
+.vue-indoor-map {
+  height: 100%;
+  width: 100%;
+}
 </style>
