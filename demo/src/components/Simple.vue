@@ -1,51 +1,64 @@
 <template>
-  <i-map ref="map" :center="center" :zoom="zoom" @ready="onMapReady" :showGrid="false">
-    <i-floor :url="url" :width="800" :opacity="0.8" />
+  <i-map
+    ref="map"
+    :center="center"
+    :zoom="zoom"
+    :show-grid="true"
+    :has-axis="false"
+    :has-scale-ruler="true"
+    :clustering-markers="true"
+    @ready="onMapReady"
+    :scaleRulerStringStyle="'border-color: blue'"
+  >
+    <i-floor :url="url" :opacity="0.8" :scale="1" />
     <i-marker
       v-for="marker in markers"
-      :key="marker.id"
       :id="marker.id"
+      :key="marker.id"
       :position="marker.position"
       :size="marker.size"
       :text="marker.text"
       :stroke="markerColor(marker)"
+      :draggable="true"
       @click="handleMarkerClick(marker, $event)"
       @rotating="handleMarkerRotating(marker, $event)"
       @moving="handleMarkerMoving(marker, $event)"
       @moved="handleMarkerMoved(marker, $event)"
-      :draggable="true"
-    ></i-marker>
-    <i-marker
+    />
+    <i-radar
       v-if="radar"
-      :draggable="false"
+      :id="radar.id"
+      :key="'r' + radar.id"
       :position="radar.position"
-      :rotation="radar.rotation"
-      :zIndex="90"
+      :rotation="radar.angle"
+      :fov="radar.fov"
+      :z-index="300"
+      :size="150"
       :icon="icon"
-    ></i-marker>
+    />
     <i-connector
       v-for="link in links"
       :key="radar.id + '-' + link"
       :start="radar.id"
       :color="'#008a00'"
       :end="link"
-    ></i-connector>
+    />
     <i-marker-group
-      @moving="handleGroupMoving"
-      @moved="handleGroupMoved"
-      @scaling="handleGroupScaling"
-      @rotating="handleGroupRotating"
       :bounds="[
         [0, 0],
         [200, 200]
       ]"
+      @moving="handleGroupMoving"
+      @moved="handleGroupMoved"
+      @scaling="handleGroupScaling"
+      @rotating="handleGroupRotating"
     />
   </i-map>
 </template>
 
 <script>
 import * as I from 'indoorjs';
-import { iMap, iMarkerGroup, iMarker, iFloor, iConnector } from 'vue-indoor';
+import { iMap, iMarkerGroup, iMarker, iRadar, iFloor, iConnector } from 'vue-indoor';
 
 export default {
   name: 'Example',
@@ -54,17 +67,18 @@ export default {
     iFloor,
     iMarker,
     iConnector,
-    iMarkerGroup
+    iMarkerGroup,
+    iRadar
   },
   data() {
     return {
       zoom: 1,
-      url: '/static/images/fp.jpeg',
+      url: '/assets/images/fp.jpeg',
       center: new I.Point(0, 0),
       markers: [],
       radar: null,
       icon: {
-        url: '/static/images/radar.png',
+        url: '/assets/images/radar.png',
         size: 20
       },
       links: []
@@ -74,6 +88,7 @@ export default {
   methods: {
     onMapReady(e) {
       console.log('map ready', e);
+      window.map = e;
       this.addMarkers();
     },
     handleMarkerMoving(marker, imarker) {
@@ -84,7 +99,7 @@ export default {
       }
     },
     handleMarkerRotating(marker, imarker) {
-      //console.log('rotating', imarker);
+      // console.log('rotating', imarker);
       marker.rotation = imarker.rotation + 0;
       if (marker.id === this.radar.id) {
         this.radar.rotation = imarker.rotation + 0;
@@ -99,10 +114,12 @@ export default {
     handleMarkerClick(marker, imarker) {
       this.radar = null;
       this.radar = Object.assign({}, marker);
+      this.radar.angle = ~~(Math.random() * 360);
+      this.radar.fov = ~~(Math.random() * 90 + 30);
 
       this.links = [];
 
-      for (var i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i += 1) {
         let random;
         do {
           random = ~~(Math.random() * 19);
@@ -134,9 +151,7 @@ export default {
     showLongText() {
       this.showParagraph = !this.showParagraph;
     },
-    innerClick() {
-      alert('Click!');
-    },
+    innerClick() {},
 
     addMarkers() {
       this.markers = [];
@@ -189,14 +204,14 @@ export default {
     selectAll() {
       const canvas = this.$refs.map.mapObject.canvas;
 
-      var objs = canvas.getObjects();
+      let objs = canvas.getObjects();
 
       objs = objs.filter(o => o.class === 'marker');
 
       canvas.discardActiveObject();
 
-      var sel = new fabric.ActiveSelection(objs, {
-        canvas: canvas
+      const sel = new fabric.ActiveSelection(objs, {
+        canvas
       });
       canvas.setActiveObject(sel);
       canvas.requestRenderAll();
@@ -207,7 +222,7 @@ export default {
     markerColor(marker) {
       if (marker.id === this.radar.id) return '#dc322f';
 
-      for (let i = 0; i < this.links.length; i++) {
+      for (let i = 0; i < this.links.length; i += 1) {
         const link = this.links[i];
         if (marker.id === link) return '#008a00';
       }

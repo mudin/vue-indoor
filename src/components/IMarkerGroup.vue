@@ -25,19 +25,19 @@ export default {
     },
     rotation: {
       type: Number,
-      default () {
+      default() {
         return 0;
       }
     },
     yaw: {
       type: Number,
-      default () {
+      default() {
         return 0;
       }
     },
     size: {
       type: Number,
-      default () {
+      default() {
         return 10;
       }
     },
@@ -72,26 +72,29 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {
       ready: false
     };
   },
-  mounted () {
-    const options = optionsMerger({
-      ...this.layerOptions,
-      id: this.id,
-      icon: this.icon,
-      text: this.text ? this.text + '' : this.text,
-      zIndex: this.zIndex,
-      rotation: this.rotation,
-      yaw: this.yaw,
-      size: this.size,
-      draggable: this.draggable,
-      stroke: this.stroke,
-      color: this.color,
-      textColor: this.textColor
-    }, this);
+  mounted() {
+    const options = optionsMerger(
+      {
+        ...this.layerOptions,
+        id: this.id,
+        icon: this.icon,
+        text: this.text ? this.text + '' : this.text,
+        zIndex: this.zIndex,
+        rotation: this.rotation,
+        yaw: this.yaw,
+        size: this.size,
+        draggable: this.draggable,
+        stroke: this.stroke,
+        color: this.color,
+        textColor: this.textColor
+      },
+      this
+    );
     this.mapObject = new MarkerGroup(this.bounds, options);
     // DomEvent.on(this.mapObject, this.$listeners);
 
@@ -108,12 +111,12 @@ export default {
     this.ready = true;
   },
   methods: {
-    setDraggable (newVal, oldVal) {
+    setDraggable(newVal, oldVal) {
       if (this.mapObject.dragging) {
         newVal ? this.mapObject.dragging.enable() : this.mapObject.dragging.disable();
       }
     },
-    setBounds (newVal) {
+    setBounds(newVal) {
       if (newVal == null || this.mapObject.inGroup) {
         return;
       }
@@ -122,28 +125,28 @@ export default {
         this.mapObject.setBounds(newVal);
       }
     },
-    setStroke (newVal, oldVal) {
+    setStroke(newVal, oldVal) {
       if (this.mapObject) {
         this.mapObject.setStroke(newVal);
       }
     },
-    setTextColor (newVal, oldVal) {
+    setTextColor(newVal, oldVal) {
       if (this.mapObject) {
         this.mapObject.setTextColor(newVal);
       }
     },
-    setText (newVal, oldVal) {
+    setText(newVal, oldVal) {
       if (this.mapObject) {
         this.mapObject.setText(newVal);
       }
     },
-    setColor (newVal, oldVal) {
+    setColor(newVal, oldVal) {
       if (this.mapObject) {
         this.mapObject.setColor(newVal);
       }
     }
   },
-  render: function (h) {
+  render: function(h) {
     if (this.ready && this.$slots.default) {
       return h('div', { style: { display: 'none' } }, this.$slots.default);
     }

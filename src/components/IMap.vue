@@ -80,6 +80,10 @@ export default {
       type: Boolean,
       default: null
     },
+    ignoreNearest: {
+      type: Boolean,
+      default: false
+    },
     zoomAnimationThreshold: {
       type: Number,
       default: null
@@ -99,6 +103,26 @@ export default {
     showGrid: {
       type: Boolean,
       default: true
+    },
+    hasAxis: {
+      type: Boolean,
+      default: true
+    },
+    hasScaleRuler: {
+      type: Boolean,
+      default: false
+    },
+    scaleBoxStringStyle: {
+      type: String,
+      default: ''
+    },
+    scaleRulerStringStyle: {
+      type: String,
+      default: ''
+    },
+    clusteringMarkers: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -138,6 +162,7 @@ export default {
         center: this.center,
         zoom: this.zoom,
         inertia: this.inertia,
+        ignoreNearest: this.ignoreNearest,
         inertiaDeceleration: this.inertiaDeceleration,
         inertiaMaxSpeed: this.inertiaMaxSpeed,
         easeLinearity: this.easeLinearity,
@@ -145,7 +170,12 @@ export default {
         zoomAnimationThreshold: this.zoomAnimationThreshold,
         fadeAnimation: this.fadeAnimation,
         markerZoomAnimation: this.markerZoomAnimation,
-        showGrid: this.showGrid
+        showGrid: this.showGrid,
+        hasAxis: this.hasAxis,
+        hasScaleRuler: this.hasScaleRuler,
+        scaleBoxStringStyle: this.scaleBoxStringStyle,
+        scaleRulerStringStyle: this.scaleRulerStringStyle,
+        clusteringMarkers: this.clusteringMarkers
       },
       this
     );

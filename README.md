@@ -24,7 +24,7 @@ vue-indoor is a JavaScript library for the [Vue](https://vuejs.org/) framework t
 
 ## How to install
 
-``` bash
+```bash
 npm install vue-indoor indoorjs --save
 ```
 
@@ -46,7 +46,7 @@ Is highly suggested to import only the needed modules by doing so:
 
 ```javascript
 import * as Indoor from 'indoorjs';
-import {IMap, IFloor, IMap} from 'vue-indoor';
+import { IMap, IFloor, IMap } from 'vue-indoor';
 ```
 
 This will reduce the size of the bundle significantly

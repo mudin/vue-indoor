@@ -43,12 +43,12 @@ export default {
       default: null
     }
   },
-  data () {
+  data() {
     return {
       ready: false
     };
   },
-  mounted () {
+  mounted() {
     this.parentContainer = findRealParent(this.$parent);
 
     const map = this.parentContainer.mapObject;
@@ -65,15 +65,18 @@ export default {
       return;
     }
 
-    const options = optionsMerger({
-      ...this.layerOptions,
-      id: this.id,
-      start,
-      end,
-      color: this.color,
-      strokeWidth: this.strokeWidth,
-      zIndex: this.zIndex
-    }, this);
+    const options = optionsMerger(
+      {
+        ...this.layerOptions,
+        id: this.id,
+        start,
+        end,
+        color: this.color,
+        strokeWidth: this.strokeWidth,
+        zIndex: this.zIndex
+      },
+      this
+    );
     this.mapObject = new Connector(start, end, options);
 
     this.parentContainer.addLayer(this);
@@ -90,7 +93,7 @@ export default {
     });
   },
   methods: {
-    setStart (id) {
+    setStart(id) {
       let start = null;
       const map = this.parentContainer.mapObject;
       const markers = map.getMarkers();
@@ -105,7 +108,7 @@ export default {
       }
     },
 
-    setEnd (id) {
+    setEnd(id) {
       let end = null;
       const map = this.parentContainer.mapObject;
       const markers = map.getMarkers();
@@ -119,15 +122,15 @@ export default {
         this.mapObject.setEnd(end);
       }
     },
-    setColor (color) {
+    setColor(color) {
       this.mapObject.setColor(color);
     },
 
-    setStrokeWidth (strokeWidth) {
+    setStrokeWidth(strokeWidth) {
       this.mapObject.setStrokeWidth(strokeWidth);
     }
   },
-  render: function (h) {
+  render: function(h) {
     if (this.ready && this.$slots.default) {
       return h('div', { style: { display: 'none' } }, this.$slots.default);
     }

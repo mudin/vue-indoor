@@ -6,9 +6,9 @@ import { Floor } from 'indoorjs';
 export default {
   name: 'IFloor',
   mixins: [ImageOverlayMixin],
-  mounted () {
+  mounted() {
     const options = optionsMerger(this.imageOverlayOptions, this);
-    console.log(this);
+    console.log(this, options);
     this.mapObject = new Floor(options);
     // DomEvent.on(this.mapObject, this.$listeners);
     propsBinder(this, this.mapObject, this.$options.props);
@@ -18,7 +18,7 @@ export default {
       this.$emit('ready', this.mapObject);
     });
   },
-  render () {
+  render() {
     return null;
   }
 };

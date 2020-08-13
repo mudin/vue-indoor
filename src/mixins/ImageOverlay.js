@@ -21,6 +21,12 @@ export default {
         return -1; // auto
       }
     },
+    scale: {
+      type: Number,
+      default: () => {
+        return 1;
+      }
+    },
     position: {
       type: [Object, Array],
       custom: true,
@@ -63,7 +69,7 @@ export default {
       default: ''
     }
   },
-  mounted () {
+  mounted() {
     this.imageOverlayOptions = {
       ...this.layerOptions,
       ...this.interactiveLayerOptions,
@@ -72,6 +78,7 @@ export default {
       url: this.url,
       width: this.width,
       height: this.height,
+      scale: this.scale,
       position: this.position,
       interactive: this.interactive,
       crossOrigin: this.crossOrigin,
@@ -81,35 +88,35 @@ export default {
     };
   },
   methods: {
-    setOpacity (opacity) {
+    setOpacity(opacity) {
       return this.mapObject.setOpacity(opacity);
     },
-    setUrl (url) {
+    setUrl(url) {
       return this.mapObject.setUrl(url);
     },
-    setWidth (width) {
+    setWidth(width) {
       return this.mapObject.setWidth(width);
     },
-    setPosition (position) {
+    setPosition(position) {
       return this.mapObject.setPosition(position);
     },
-    setBounds (bounds) {
+    setBounds(bounds) {
       return this.mapObject.setBounds(bounds);
     },
-    getBounds () {
+    getBounds() {
       return this.mapObject.getBounds();
     },
-    getElement () {
+    getElement() {
       return this.mapObject.getElement();
     },
-    bringToFront () {
+    bringToFront() {
       return this.mapObject.bringToFront();
     },
-    bringToBack () {
+    bringToBack() {
       return this.mapObject.bringToBack();
     }
   },
-  render () {
+  render() {
     return null;
   }
 };

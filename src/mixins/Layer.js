@@ -29,37 +29,42 @@ export default {
       default: true
     }
   },
-  mounted () {
-    this.layerOptions = {
-      attribution: this.attribution,
-      pane: this.pane
+  data() {
+    return {
+      layerOptions: {}
     };
   },
-  beforeDestroy () {
+  mounted() {
+    Object.assign(this.layerOptions, {
+      attribution: this.attribution,
+      pane: this.pane
+    });
+  },
+  beforeDestroy() {
     if (this.parentContainer) {
       this.parentContainer.removeLayer(this);
     }
   },
   methods: {
-    setAttribution (val, old) {
+    setAttribution(val, old) {
       const attributionControl = this.$parent.mapObject.attributionControl;
       attributionControl.removeAttribution(old).addAttribution(val);
     },
-    setName (newVal, oldVal) {
+    setName(newVal, oldVal) {
       if (newVal === oldVal) return;
       this.parentContainer.removeLayer(this);
       if (this.visible) {
         this.parentContainer.addLayer(this);
       }
     },
-    setLayerType (newVal, oldVal) {
+    setLayerType(newVal, oldVal) {
       if (newVal === oldVal) return;
       this.parentContainer.removeLayer(this);
       if (this.visible) {
         this.parentContainer.addLayer(this);
       }
     },
-    setVisible (newVal, oldVal) {
+    setVisible(newVal, oldVal) {
       if (newVal === oldVal) return;
       if (this.mapObject) {
         if (newVal) {
@@ -69,13 +74,13 @@ export default {
         }
       }
     },
-    unbindTooltip () {
+    unbindTooltip() {
       const tooltip = this.mapObject ? this.mapObject.getTooltip() : null;
       if (tooltip) {
         tooltip.unbindTooltip();
       }
     },
-    unbindPopup () {
+    unbindPopup() {
       const popup = this.mapObject ? this.mapObject.getPopup() : null;
       if (popup) {
         popup.unbindPopup();

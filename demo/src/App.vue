@@ -3,27 +3,27 @@
     <div class="sider">
       <ul id="side">
         <li>
-          <a href="#" @click="currentView='simple'">Simple Floor</a>
+          <a href="#" @click="currentView = 'simple'">Simple Floor</a>
         </li>
       </ul>
     </div>
     <div class="content">
-      <component id="full_div" :is="currentView"/>
+      <component id="full_div" :is="currentView" />
     </div>
   </div>
 </template>
 
 <script>
-import Simple from "./components/Simple";
+import Simple from './components/Simple';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Simple
   },
   data() {
     return {
-      currentView: "simple"
+      currentView: 'simple'
     };
   }
 };

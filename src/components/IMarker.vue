@@ -51,6 +51,10 @@ export default {
       custom: true,
       default: null
     },
+    type: {
+      type: String,
+      default: 'marker'
+    },
     stroke: {
       type: String,
       custom: true,
@@ -71,10 +75,25 @@ export default {
       custom: false,
       default: null
     },
+    id: {
+      type: [String, Number],
+      custom: true,
+      default: null
+    },
     zIndex: {
       type: Number,
       custom: false,
       default: null
+    },
+    fovPercentage: {
+      type: Number,
+      custom: true,
+      default: 100
+    },
+    fov: {
+      type: Number,
+      custom: true,
+      default: 90
     }
   },
   data() {
@@ -86,10 +105,13 @@ export default {
     const options = optionsMerger(
       {
         ...this.layerOptions,
+        type: this.type,
         id: this.id,
         icon: this.icon,
         text: this.text ? this.text + '' : this.text,
         zIndex: this.zIndex,
+        fovPercentage: this.fovPercentage,
+        fov: this.fov,
         rotation: this.rotation,
         yaw: this.yaw,
         size: this.size,
@@ -115,6 +137,7 @@ export default {
       }
       return true;
     });
+    console.log('mounted');
   },
   methods: {
     setDraggable(newVal, oldVal) {
@@ -151,9 +174,24 @@ export default {
         this.mapObject.setColor(newVal);
       }
     },
+    setId(newVal) {
+      if (this.mapObject) {
+        this.mapObject.setId(newVal);
+      }
+    },
     setSize(newVal) {
       if (this.mapObject) {
         this.mapObject.setSize(newVal);
+      }
+    },
+    setFOVPercentage(newVal) {
+      if (this.mapObject) {
+        this.mapObject.setFOVPercentage(newVal);
+      }
+    },
+    setFov(newVal) {
+      if (this.mapObject) {
+        this.mapObject.setFov(newVal);
       }
     }
   },
